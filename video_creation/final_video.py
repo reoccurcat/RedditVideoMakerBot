@@ -8,7 +8,7 @@ from moviepy.editor import (
     CompositeVideoClip,
 )
 from utils.console import print_step
-
+import string
 
 W, H = 1080, 1920
 
@@ -53,7 +53,8 @@ def make_final_video(number_of_clips, title):
     )
     image_concat.audio = audio_composite
     final = CompositeVideoClip([background_clip, image_concat])
-    finaltitle = title.replace(" ", "_").replace(title[-1], "").lower()
+    validchars = "-_.() %s%s" % (string.ascii_letters, string.digits)
+    finaltitle = ''.join(c for c in title if c in validchars)
     final.write_videofile(
         f"assets/{finaltitle}.mp4", fps=30, audio_codec="aac", audio_bitrate="192k"
     )
