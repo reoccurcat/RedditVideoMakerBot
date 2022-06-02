@@ -70,4 +70,4 @@ def get_subreddit_threads():
         pass
     print_substep("Received AskReddit threads successfully.", style="bold green")
 
-    return content
+    return content, submission.title
