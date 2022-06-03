@@ -8,6 +8,7 @@ from rich.progress import track
 
 from video_creation.TTSwrapper import TTTTSWrapper
 
+import time
 
 def save_text_to_mp3(reddit_obj):
     """Saves Text to MP3 files.
@@ -30,10 +31,12 @@ def save_text_to_mp3(reddit_obj):
 
     for idx, comment in track(enumerate(reddit_obj["comments"]), "Saving..."):
         # ! Stop creating mp3 files if the length is greater than 50 seconds. This can be longer, but this is just a good_voices starting point
+        timer = 3
         if length > 50:
             break
-
+        
         ttttsw.tts(comment["comment_body"], filename=f"assets/mp3/{idx}.mp3", random_speaker=False)
+        time.sleep(timer)
         try:
             length += MP3(f"assets/mp3/{idx}.mp3").info.length
         except (HeaderNotFoundError, MutagenError, Exception):
