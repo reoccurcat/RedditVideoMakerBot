@@ -31,7 +31,7 @@ def save_text_to_mp3(reddit_obj):
 
     for idx, comment in track(enumerate(reddit_obj["comments"]), "Saving..."):
         # ! Stop creating mp3 files if the length is greater than 50 seconds. This can be longer, but this is just a good_voices starting point
-        timer = 3
+        timer = 5
         if length > 50:
             break
         
